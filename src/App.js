@@ -1,10 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Home from "./Pages/Home/Home/Home";
+import Navbar from "./Pages/Shared/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <p className="text-blue-500"> emon morol</p>
+    <div>
+      <Navbar />
+      <Home />
     </div>
   );
 }
