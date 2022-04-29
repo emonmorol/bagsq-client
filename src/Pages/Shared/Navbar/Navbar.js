@@ -1,10 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import user from "../../../Images/userimage.png";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../fireabase.init";
+import userImage from "../../../Images/userimage.png";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+  const [userClicked, setUserClicked] = useState(false);
+  const [user] = useAuthState(auth);
+
+  const navigate = useNavigate();
+
   return (
-    <nav className="bg-gray-300 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link to="https://flowbite.com" className="flex items-center">
           <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white">
@@ -19,31 +27,43 @@ const Navbar = () => {
             aria-expanded="false"
             data-dropdown-toggle="dropdown"
           >
-            <span className="sr-only">Open user menu</span>
-            <img className="w-8 h-8 rounded-full" src={user} alt="" />
+            {/* <span className="sr-only">Open user menu</span> */}
+            <img
+              className="w-8 h-8 rounded-full"
+              onClick={() => setUserClicked(!userClicked)}
+              src={user?.photoURL ? user?.photoURL : userImage}
+              alt=""
+            />
           </button>
 
           <div
-            className="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+            className={`z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
+              userClicked ? "block" : "hidden"
+            }`}
             id="dropdown"
             data-popper-reference-hidden=""
             data-popper-escaped=""
             data-popper-placement="top"
             style={{
               position: " absolute",
-              inset: " auto auto 0px 0px",
+              // inset: " auto auto 0px 0px",
+              top: "100%",
+              right: "3%",
               margin: " 0px",
-              transform: "translate(1246px, 761px)",
             }}
           >
-            <div className="py-3 px-4">
-              <span className="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
-              </span>
-            </div>
+            {user && (
+              <>
+                <div className="py-3 px-4 z-50">
+                  <span className="block text-sm text-gray-900 dark:text-white">
+                    {user?.displayName}
+                  </span>
+                  <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+                    {user?.email}
+                  </span>
+                </div>
+              </>
+            )}
             <ul className="py-1" aria-labelledby="dropdown">
               <li>
                 <Link
@@ -53,30 +73,39 @@ const Navbar = () => {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Settings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Earnings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </Link>
-              </li>
+              {user ? (
+                <li>
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      navigate("/login");
+                      signOut(auth);
+                    }}
+                    className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Sign out
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      to="/register"
+                      className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/login"
+                      className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
           <button

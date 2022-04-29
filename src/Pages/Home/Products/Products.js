@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useProducts from "../../../Hooks/useProducts";
 import ProductCard from "../ProductCard/ProductCard";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const url = `https://bagsqhike.herokuapp.com/products`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  const [products] = useProducts([]);
 
   return (
-    <div>
-      <h1>Our Products {products.length}</h1>
-      <div className="container mx-auto grid grid-cols-3 px-28">
+    <div className="py-14">
+      <h1 className="text-center">Our Products {products.length}</h1>
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 lg:px-28 py-10">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
