@@ -1,6 +1,7 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { Link } from "react-router-dom";
 import useProducts from "../../Hooks/useProducts";
 
 const ManageInventories = () => {
@@ -23,65 +24,76 @@ const ManageInventories = () => {
   };
 
   return (
-    <div className="px-[10%] py-[5%]">
-      <h2 className="text-center my-3">All Inventories {products.length}</h2>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-8 py-3  border-x text-center">
-                Product Image
-              </th>
-              <th scope="col" className="px-6 py-3  border-x text-center">
-                Product name
-              </th>
-              <th scope="col" className="px-6 py-3  border-x text-center">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3  border-x text-center">
-                Quantity
-              </th>
-              <th scope="col" className="px-6 py-3  border-x text-center">
-                Supplier
-              </th>
-              <th scope="col" className="px-6 py-3  border-x text-center">
-                <span className="sr-only">Control</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr
-                key={product._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td className="w-1/12 px-6 py-3 border-x  dark:text-white whitespace-nowrap">
-                  <img className="w-1/2 mx-auto" src={product?.image} alt="" />
-                </td>
-                <td className="px-6 py-3 border-x text-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                  {product?.name}
-                </td>
-                <td className="px-6 py-3 border-x text-center">
-                  ${product?.price}
-                </td>
-                <td className="px-6 py-3 border-x text-center">
-                  {product?.quantity}
-                </td>
-                <td className="px-6 py-3 border-x text-center">
-                  {product?.supplier}
-                </td>
-                <td className="px-6 py-3 border-x text-center text-red-500 cursor-pointer">
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="bg-red-200 py-2 px-3 text-base rounded-full"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </td>
+    <div className="flex flex-col justify-center">
+      <div className="px-[10%] my-[2%] z-0">
+        <h2 className="text-center my-3">All Inventories {products.length}</h2>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-8 py-3  border-x text-center">
+                  Product Image
+                </th>
+                <th scope="col" className="px-6 py-3  border-x text-center">
+                  Product name
+                </th>
+                <th scope="col" className="px-6 py-3  border-x text-center">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-3  border-x text-center">
+                  Quantity
+                </th>
+                <th scope="col" className="px-6 py-3  border-x text-center">
+                  Supplier
+                </th>
+                <th scope="col" className="px-6 py-3  border-x text-center">
+                  <span className="sr-only">Control</span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr
+                  key={product._id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td className="w-1/12 px-6 py-3 border-x  dark:text-white whitespace-nowrap">
+                    <img
+                      className="w-1/2 mx-auto"
+                      src={product?.image}
+                      alt=""
+                    />
+                  </td>
+                  <td className="px-6 py-3 border-x text-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                    {product?.name}
+                  </td>
+                  <td className="px-6 py-3 border-x text-center">
+                    ${product?.price}
+                  </td>
+                  <td className="px-6 py-3 border-x text-center">
+                    {product?.quantity}
+                  </td>
+                  <td className="px-6 py-3 border-x text-center">
+                    {product?.supplier}
+                  </td>
+                  <td className="px-6 py-3 border-x text-center text-red-500 cursor-pointer">
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="bg-red-200 py-2 px-3 text-base rounded-full"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="my-5 mx-auto mb-12">
+        <Link to="/addinventory" className="bg-blue-300 py-2 px-10">
+          Add Inventory
+        </Link>
       </div>
     </div>
   );

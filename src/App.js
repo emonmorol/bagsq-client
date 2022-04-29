@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddInventory from "./Pages/AddInventory/AddInventory";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
@@ -29,6 +30,14 @@ function App() {
           element={
             <RequireAuth>
               <ManageInventories />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/addinventory"
+          element={
+            <RequireAuth>
+              <AddInventory />
             </RequireAuth>
           }
         />
