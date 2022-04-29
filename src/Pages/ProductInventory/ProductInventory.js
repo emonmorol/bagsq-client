@@ -1,7 +1,7 @@
 import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ProductInventory = () => {
   const { id } = useParams();
@@ -17,35 +17,55 @@ const ProductInventory = () => {
       .then((data) => {
         setProduct(data);
         console.log(data.quantity);
-        if (data?.quantity) {
-          setNewQuantity(data.quantity);
-        }
+        setNewQuantity(data.quantity);
       });
   }, [id]);
 
+  //
   const handleUpdateStock = (event) => {
     event.preventDefault();
     const stock = event.target.stock.value;
-    setNewQuantity(newQuantity + parseInt(stock));
-  };
-
-  const handleDelivered = () => {
-    const updatedQuantity = newQuantity - 1;
+    const updatedQuantity = +newQuantity + parseInt(stock);
     setNewQuantity(updatedQuantity);
-  };
-
-  useEffect(() => {
     const url = `http://localhost:5000/update/${id}`;
     fetch(url, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ newQuantity }),
+      body: JSON.stringify({ updatedQuantity }),
     })
       .then((res) => res.json())
       .then((data) => {});
-  }, [newQuantity]);
+  };
+
+  const handleDelivered = () => {
+    const updatedQuantity = newQuantity - 1;
+    setNewQuantity(updatedQuantity);
+    const url = `http://localhost:5000/update/${id}`;
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ updatedQuantity }),
+    })
+      .then((res) => res.json())
+      .then((data) => {});
+  };
+
+  // useEffect(() => {
+  //   const url = `http://localhost:5000/update/${id}`;
+  //   fetch(url, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ newQuantity }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {});
+  // }, [newQuantity]);
   return (
     <div className="flex justify-center items-center my-20">
       <div>
@@ -68,6 +88,7 @@ const ProductInventory = () => {
           <span className="text-2xl">
             Available: <span className="font-bold">{newQuantity}</span> Pcs.
           </span>
+          <p className="my-2">Supplier : {product?.supplier}</p>
           <p className="my-2">Product Id : {product?._id}</p>
           <span>
             <span>Rating : </span>{" "}
@@ -103,12 +124,20 @@ const ProductInventory = () => {
             Update
           </button>
         </form>
-        <button
-          onClick={handleDelivered}
-          className="bg-blue-300 py-1 px-10 my-10 rounded"
-        >
-          delivered
-        </button>
+        <div>
+          <button
+            onClick={handleDelivered}
+            className="bg-blue-300 py-1 px-10 my-10 rounded mr-5"
+          >
+            delivered
+          </button>
+          <Link
+            className="bg-blue-300 py-1 px-10 my-10 rounded"
+            to="/manageInventories"
+          >
+            Manage Inventories
+          </Link>
+        </div>
       </div>
     </div>
   );

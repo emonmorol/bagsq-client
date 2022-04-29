@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../../fireabase.init";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +13,11 @@ const Social = () => {
 
   let from = location.state?.from?.pathname || "/";
 
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
   if (error) {
     return (
       <div>
@@ -22,9 +27,6 @@ const Social = () => {
   }
   if (loading) {
     return <Loading />;
-  }
-  if (user) {
-    navigate(from, { replace: true });
   }
 
   return (
