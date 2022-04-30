@@ -1,9 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../../fireabase.init";
 import loginImage from "../../../Images/loginImage.png";
+import Loading from "../../Shared/Loading/Loading";
 import Social from "../Social/Social";
 
 const Login = () => {
+  const [signInWithEmailAndPassword, hookUser, loading, hookError] =
+    useSignInWithEmailAndPassword(auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+  const navigate = useNavigate();
+  let location = useLocation();
+  const [user] = useAuthState(auth);
+
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  const handleEmailInput = (e) => {
+    if (/^\S+@\S+\.\S+$/.test(e.target.value)) {
+      setErrors({ ...errors, emailError: " " });
+      setEmail(e.target.value);
+    } else {
+      setErrors({ ...errors, emailError: "Please Input Valid Email!" });
+      setEmail("");
+    }
+  };
+  const handlePasswordInput = (e) => {
+    if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(e.target.value)) {
+      setPassword(e.target.value);
+      setErrors({ ...errors, passwordError: "" });
+    } else {
+      setErrors({ ...errors, passwordError: "Please Input valid password!" });
+      setPassword("");
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(email, password);
+  };
   return (
     <>
       <div className="lg:flex">
@@ -20,11 +75,12 @@ const Login = () => {
             </div>
           </div>
           <div className="mt-10">
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="relative my-4">
                 <input
                   type="email"
                   name="email"
+                  onChange={handleEmailInput}
                   id="floating_outlined"
                   className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
                   placeholder=" "
@@ -36,10 +92,14 @@ const Login = () => {
                   Enter Your Email
                 </label>
               </div>
+              {errors?.emailError && (
+                <p className="text-center text-red-500">{errors.emailError}</p>
+              )}
               <div className="relative my-4 mb-6">
                 <input
                   type="password"
                   name="password"
+                  onChange={handlePasswordInput}
                   id="floating_outlined1"
                   className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
                   placeholder=" "
@@ -51,15 +111,14 @@ const Login = () => {
                   Enter Your Password
                 </label>
               </div>
-
-              <div className="flex items-center mb-6 -mt-4">
-                <div className="flex ml-auto">
-                  <span className="inline-flex text-xs sm:text-sm text-blue-500 hover:text-blue-700">
-                    Forgot Your Password?
-                  </span>
-                </div>
-              </div>
-
+              {errors?.passwordError && (
+                <p className="text-center text-red-500">
+                  {errors.passwordError}
+                </p>
+              )}
+              {hookError && (
+                <p className="text-center text-red-500">{hookError.message}</p>
+              )}
               <div className="flex w-full">
                 <button
                   type="submit"
@@ -72,7 +131,7 @@ const Login = () => {
                       fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
@@ -83,26 +142,17 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="flex justify-center items-center mt-6">
+          <div className="flex justify-between items-center mt-6">
             <Link
               to="/register"
               className="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
             >
-              <span>
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
-              </span>
+              <FontAwesomeIcon icon={faUserPlus} />
               <span className="ml-2">New to BagsQ ?</span>
             </Link>
+            <div className="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
+              <span className="ml-2">Forgot Your Password?</span>
+            </div>
           </div>
         </div>
         {/* </div> */}

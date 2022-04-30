@@ -1,9 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../../fireabase.init";
 import registerImage from "../../../Images/register-img.png";
+import Loading from "../../Shared/Loading/Loading";
 import Social from "../Social/Social";
 
 const Register = () => {
+  const [createUserWithEmailAndPassword, hookUser, loading, hookError] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile] = useUpdateProfile(auth);
+  const [user] = useAuthState(auth);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+    passwordConfirmation: "",
+  });
+
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+
+  if (loading) {
+    return <Loading />;
+  }
+  console.log(user);
+  console.log(errors);
+  const handleNameInput = (e) => {
+    setName(e.target.value);
+  };
+  const handleEmailInput = (e) => {
+    if (/^\S+@\S+\.\S+$/.test(e.target.value)) {
+      setErrors({ ...errors, emailError: " " });
+      setEmail(e.target.value);
+    } else {
+      setErrors({ ...errors, emailError: "Please Input Valid Email!" });
+      setEmail("");
+    }
+  };
+  const handlePasswordInput = (e) => {
+    if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(e.target.value)) {
+      setPassword(e.target.value);
+      setErrors({ ...errors, passwordError: "" });
+    } else {
+      setErrors({ ...errors, passwordError: "Please Input valid password!" });
+      setPassword("");
+    }
+  };
+  const handleConfirmInput = (e) => {
+    if (e.target.value === password) {
+      setErrors({ ...errors, passwordConfirmation: "" });
+      setConfirmPassword(e.target.value);
+    } else {
+      setErrors({
+        ...errors,
+        passwordConfirmation: "Password Didn't Matched",
+      });
+      setConfirmPassword("");
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (confirmPassword === password) {
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({ displayName: name });
+      toast("Name Updated");
+      if (user) {
+        navigate(from, { replace: true });
+      }
+    }
+  };
+
   return (
     <>
       <div className="lg:flex">
@@ -20,17 +98,18 @@ const Register = () => {
             </div>
           </div>
           <div className="mt-10">
-            <form>
+            <form onSubmit={handleRegister}>
               <div className="relative">
                 <input
                   type="text"
                   name="name"
-                  id="floating_outlined"
+                  onChange={handleNameInput}
+                  id="floating_outlined1"
                   className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
                   placeholder=" "
                 />
                 <label
-                  for="floating_outlined"
+                  htmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Full name
@@ -40,42 +119,65 @@ const Register = () => {
                 <input
                   type="email"
                   name="email"
-                  id="floating_outlined"
+                  onChange={handleEmailInput}
+                  id="floating_outlined2"
                   className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
                   placeholder=" "
                 />
                 <label
-                  for="floating_outlined"
+                  htmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Email
                 </label>
               </div>
+              {errors?.emailError && (
+                <p className="text-center text-red-500">{errors.emailError}</p>
+              )}
               <div className="relative my-4 mb-6">
                 <input
                   type="password"
                   name="password"
-                  id="floating_outlined"
+                  onChange={handlePasswordInput}
+                  id="floating_outlined3"
                   className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
                   placeholder=" "
                 />
                 <label
-                  for="floating_outlined"
+                  htmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Password
                 </label>
               </div>
+              {errors?.passwordError && (
+                <p className="text-center text-red-500">
+                  {errors.passwordError}
+                </p>
+              )}
+              <div className="relative my-4 mb-5">
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  onChange={handleConfirmInput}
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
+                  placeholder=" "
+                />
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Confirm Your Password
+                </label>
+              </div>
+              {errors?.passwordConfirmation && (
+                <p className="text-center text-red-500">
+                  {errors.passwordConfirmation}
+                </p>
+              )}
 
-              {/* <div className="flex items-center mb-6 -mt-4">
-                <div className="flex ml-auto">
-                  <span className="inline-flex text-xs sm:text-sm text-blue-500 hover:text-blue-700">
-                    Forgot Your Password?
-                  </span>
-                </div>
-              </div> */}
-
-              <div className="flex w-full">
+              <div className="flex w-full my-4">
                 <button
                   type="submit"
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-600 hover:bg-blue-700 rounded py-2 w-full transition duration-150 ease-in"
@@ -85,9 +187,9 @@ const Register = () => {
                     <svg
                       className="h-6 w-6"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
@@ -96,6 +198,9 @@ const Register = () => {
                   </span>
                 </button>
               </div>
+              {hookError && (
+                <p className="text-center text-red-500">{hookError.message}</p>
+              )}
             </form>
           </div>
           <div className="flex justify-center items-center mt-6">
@@ -107,9 +212,9 @@ const Register = () => {
                 <svg
                   className="h-6 w-6"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >

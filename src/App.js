@@ -11,6 +11,7 @@ import Footer from "./Pages/Shared/Footer/Footer";
 import Navbar from "./Pages/Shared/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MyItem from "./Pages/MyItem/MyItem";
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/myitem"
+          element={
+            <RequireAuth>
+              <MyItem />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />

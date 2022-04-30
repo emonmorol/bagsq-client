@@ -18,13 +18,6 @@ const Social = () => {
       navigate(from, { replace: true });
     }
   }, [user]);
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
-  }
   if (loading) {
     return <Loading />;
   }
@@ -37,6 +30,7 @@ const Social = () => {
       >
         <span>Sign In with Google</span>
       </button>
+      {error && <p className="text-center text-red-500">{error.message}</p>}
     </>
   );
 };
