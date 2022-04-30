@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import {
   useAuthState,
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../../fireabase.init";
 import loginImage from "../../../Images/loginImage.png";
 import Loading from "../../Shared/Loading/Loading";
@@ -14,6 +16,8 @@ import Social from "../Social/Social";
 const Login = () => {
   const [signInWithEmailAndPassword, hookUser, loading, hookError] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+  const [user] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({
@@ -22,7 +26,6 @@ const Login = () => {
   });
   const navigate = useNavigate();
   let location = useLocation();
-  const [user] = useAuthState(auth);
 
   let from = location.state?.from?.pathname || "/";
 
@@ -59,6 +62,16 @@ const Login = () => {
     e.preventDefault();
     signInWithEmailAndPassword(email, password);
   };
+
+  const handleResetPass = async () => {
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Password Reset Email Sent!");
+    } else {
+      toast("Please Input Your Email!");
+    }
+  };
+
   return (
     <>
       <div className="lg:flex">
@@ -150,7 +163,10 @@ const Login = () => {
               <FontAwesomeIcon icon={faUserPlus} />
               <span className="ml-2">New to BagsQ ?</span>
             </Link>
-            <div className="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
+            <div
+              onClick={handleResetPass}
+              className="inline-flex cursor-pointer items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center"
+            >
               <span className="ml-2">Forgot Your Password?</span>
             </div>
           </div>

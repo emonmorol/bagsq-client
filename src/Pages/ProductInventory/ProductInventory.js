@@ -16,7 +16,6 @@ const ProductInventory = () => {
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
-        console.log(data.quantity);
         setNewQuantity(data.quantity);
       });
   }, [id]);
@@ -36,7 +35,9 @@ const ProductInventory = () => {
       body: JSON.stringify({ updatedQuantity }),
     })
       .then((res) => res.json())
-      .then((data) => {});
+      .then((data) => {
+        event.target.reset();
+      });
   };
 
   const handleDelivered = () => {
@@ -53,19 +54,6 @@ const ProductInventory = () => {
       .then((res) => res.json())
       .then((data) => {});
   };
-
-  // useEffect(() => {
-  //   const url = `http://localhost:5000/update/${id}`;
-  //   fetch(url, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({ newQuantity }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {});
-  // }, [newQuantity]);
   return (
     <div className="flex justify-center items-center my-20">
       <div>

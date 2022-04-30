@@ -7,12 +7,13 @@ import auth from "../../fireabase.init";
 import bagsq from "../../Images/BagsQ.png";
 
 const AddInventory = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [user] = useAuthState(auth);
   const onSubmit = (data) => {
     axios.post("http://localhost:5000/addinventory", data).then((response) => {
       if (response) {
         toast("Inventory Product Added");
+        reset();
       }
     });
   };
@@ -20,7 +21,7 @@ const AddInventory = () => {
   return (
     <div>
       <form
-        className="flex flex-col mx-auto justify-center lg:w-1/3 w-3/4 p-5 my-8 rounded-2xl shadow-lg"
+        className="flex flex-col mx-auto justify-center lg:w-1/2 w-5/6 lg:p-24 p-5 my-8 rounded-2xl shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="w-full mt-2 mb-6">
@@ -52,6 +53,7 @@ const AddInventory = () => {
 
         <label>Supplier Name</label>
         <input
+          value={user?.displayName}
           className="border py-2 px-5 mb-4 rounded-lg"
           {...register("supplier", { required: true })}
         />
@@ -76,10 +78,19 @@ const AddInventory = () => {
           {...register("image", { required: true })}
         />
 
-        <input
-          className="border py-2 px-5 mb-4 rounded-lg cursor-pointer bg-blue-300"
-          type="submit"
-        />
+        <div className="flex justify-center">
+          <input
+            className="border py-2 lg:px-14 px-6 mb-4 mr-2 rounded-lg cursor-pointer bg-blue-300"
+            type="submit"
+          />
+          <input
+            onClick={() => {
+              reset();
+            }}
+            className="border py-2 lg:px-14 px-6 mb-4 ml-2 rounded-lg cursor-pointer bg-blue-300"
+            type="reset"
+          />
+        </div>
       </form>
     </div>
   );

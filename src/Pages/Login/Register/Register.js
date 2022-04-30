@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import Social from "../Social/Social";
 const Register = () => {
   const [createUserWithEmailAndPassword, hookUser, loading, hookError] =
     useCreateUserWithEmailAndPassword(auth);
+  const [sendEmailVerification] = useSendEmailVerification(auth);
   const [updateProfile] = useUpdateProfile(auth);
   const [user] = useAuthState(auth);
   const [email, setEmail] = useState("");
@@ -34,8 +36,6 @@ const Register = () => {
   if (loading) {
     return <Loading />;
   }
-  console.log(user);
-  console.log(errors);
   const handleNameInput = (e) => {
     setName(e.target.value);
   };
@@ -75,6 +75,7 @@ const Register = () => {
     if (confirmPassword === password) {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
+      await sendEmailVerification();
       toast("Name Updated");
       if (user) {
         navigate(from, { replace: true });
