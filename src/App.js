@@ -9,6 +9,8 @@ import ManageInventories from "./Pages/ManageInventories/ManageInventories";
 import ProductInventory from "./Pages/ProductInventory/ProductInventory";
 import Footer from "./Pages/Shared/Footer/Footer";
 import Navbar from "./Pages/Shared/Navbar/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

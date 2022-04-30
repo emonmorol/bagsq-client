@@ -1,13 +1,21 @@
+import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import auth from "../../fireabase.init";
 import bagsq from "../../Images/BagsQ.png";
 
 const AddInventory = () => {
   const { register, handleSubmit } = useForm();
   const [user] = useAuthState(auth);
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    axios.post("http://localhost:5000/addinventory", data).then((response) => {
+      if (response) {
+        toast("Inventory Product Added");
+      }
+    });
+  };
 
   return (
     <div>
