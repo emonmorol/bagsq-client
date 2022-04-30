@@ -4,6 +4,7 @@ import auth from "../../../fireabase.init";
 import userImage from "../../../Images/userimage.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
+import bagsq from "../../../Images/BagsQ.png";
 
 const Navbar = () => {
   const [userClicked, setUserClicked] = useState(false);
@@ -13,11 +14,11 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0">
+    <nav className="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 z-50">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link to="https://flowbite.com" className="flex items-center">
-          <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white">
-            BagsQ
+        <Link to="/" className="flex items-center">
+          <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white w-1/4">
+            <img src={bagsq} alt="" />
           </span>
         </Link>
         <div className="flex items-center md:order-2">
