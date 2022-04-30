@@ -25,7 +25,7 @@ const ManageInventories = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="px-[10%] my-[2%] z-0">
+      <div className="px-[10%] my-[2%]">
         <h2 className="text-center my-3">All Inventories {products.length}</h2>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -76,10 +76,10 @@ const ManageInventories = () => {
                   <td className="px-6 py-3 border-x text-center">
                     {product?.supplier}
                   </td>
-                  <td className="px-6 py-3 border-x text-center text-red-500 cursor-pointer">
+                  <td className="px-6 py-3 border-x text-center text-red-500">
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="bg-red-200 py-2 px-3 text-base rounded-full"
+                      className="bg-red-200 py-2 px-3 text-base rounded-full cursor-pointer"
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
