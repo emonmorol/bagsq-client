@@ -2,9 +2,8 @@ import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import useProducts from "../../Hooks/useProducts";
 
-const MyItemCard = ({ item }) => {
+const MyItemCard = ({ item, handleDelete }) => {
   const { name, description, image, quantity, price, _id } = item;
   const navigate = useNavigate();
 
@@ -20,7 +19,6 @@ const MyItemCard = ({ item }) => {
               <span className="block text-lg text-gray-600 font-bold tracking-wide">
                 {name}
               </span>
-              ``
               <span className="font-semibold uppercase text-blue-400">
                 ${price}
               </span>

@@ -16,12 +16,29 @@ const MyItem = () => {
     });
   }, [user]);
 
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are Your Sure? You want To Delete??");
+    if (proceed) {
+      const url = `http://localhost:5000/inventory/${id}`;
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const remainingProducts = myInventory.filter(
+            (product) => product._id !== id
+          );
+          setMyInventory(remainingProducts);
+        });
+    }
+  };
+
   return (
     <div className="py-14 flex flex-col justify-center">
       <h1 className="text-center">Our Products</h1>
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 lg:px-28 pt-5">
         {myInventory.map((item) => (
-          <MyItemCard key={item._id} item={item} />
+          <MyItemCard key={item._id} item={item} handleDelete={handleDelete} />
         ))}
       </div>
       <Link
