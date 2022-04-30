@@ -1,6 +1,6 @@
 .banner {
   background-image: url(../../../Images/banner.jpg);
-  min-height: 850px;
+  min-height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,10 +20,11 @@
   font-weight: 900;
   text-transform: uppercase;
   font-size: 50px;
+  text-align: center;
 }
 .inside-banner p {
   color: white;
-  width: 75ch;
+  width: 30ch;
   text-align: center;
 }
 .inside-banner a {
@@ -36,4 +37,11 @@
 }
 .inside-banner a:hover {
   background-color: #00b3ff;
+}
+
+@media screen and (max-width: 640px) {
+  .inside-banner h1 {
+    font-weight: 800;
+    font-size: 30px;
+  }
 }

@@ -6,12 +6,8 @@ const Banner = () => {
   return (
     <div className="banner-content">
       <div className="banner">
-        <div className="inside-banner">
+        <div className="inside-banner px-5">
           <h1>Wellcome To BagsQ</h1>
-          {/* <p>
-            Your orders are sent to our warehouses, where inventory is picked,
-            packed, and shipped to your customers within 24 hrs...
-          </p> */}
           <Link to="/aboutus">About Us</Link>
         </div>
       </div>

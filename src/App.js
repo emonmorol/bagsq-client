@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyItem from "./Pages/MyItem/MyItem";
 import NotFound from "./Pages/Shared/NotFound/NotFound";
+import DetailedReview from "./Pages/DetailedReview/DetailedReview";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/review/:id" element={<DetailedReview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
