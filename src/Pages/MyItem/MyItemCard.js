@@ -8,7 +8,7 @@ const MyItemCard = ({ item, handleDelete }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="py-5 border rounded-2xl">
+    <div className="py-5 border rounded-2xl bg-white">
       <div className="lg:flex block items-center">
         <div className="lg:w-1/4  px-3 py-4 mx-auto">
           <img src={image} alt="" />
