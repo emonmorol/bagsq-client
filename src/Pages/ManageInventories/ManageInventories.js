@@ -24,7 +24,7 @@ const ManageInventories = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center min-h-screen">
       <div className="px-[10%] my-[2%]">
         <h2 className="text-center my-3">All Inventories {products.length}</h2>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

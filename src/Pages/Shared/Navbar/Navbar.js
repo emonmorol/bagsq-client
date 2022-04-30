@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import auth from "../../../fireabase.init";
 import userImage from "../../../Images/userimage.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import bagsq from "../../../Images/BagsQ.png";
+import CustomLink from "../../../CustomLink/CustomLink";
 
 const Navbar = () => {
   const [userClicked, setUserClicked] = useState(false);
   const [menuClicked, setMenuClicked] = useState(false);
   const [user] = useAuthState(auth);
-
-  const navigate = useNavigate();
 
   return (
     <nav className="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 z-50">
@@ -67,43 +66,42 @@ const Navbar = () => {
             )}
             <ul className="py-1" aria-labelledby="dropdown">
               <li>
-                <Link
-                  to="/"
+                <CustomLink
+                  to="/dashboard"
                   className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Dashboard
-                </Link>
+                </CustomLink>
               </li>
               {user ? (
                 <li>
-                  <Link
-                    to="/"
+                  <CustomLink
+                    to="/login"
                     onClick={() => {
-                      navigate("/login");
                       signOut(auth);
                     }}
                     className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Sign out
-                  </Link>
+                  </CustomLink>
                 </li>
               ) : (
                 <>
                   <li>
-                    <Link
+                    <CustomLink
                       to="/register"
                       className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Register
-                    </Link>
+                    </CustomLink>
                   </li>
                   <li>
-                    <Link
+                    <CustomLink
                       to="/login"
                       className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Login
-                    </Link>
+                    </CustomLink>
                   </li>
                 </>
               )}
@@ -155,87 +153,86 @@ const Navbar = () => {
         >
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>
-              <Link
-                to="/"
-                className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+              <CustomLink
+                to="/home"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 aria-current="page"
               >
                 Home
-              </Link>
+              </CustomLink>
             </li>
             <li>
-              <Link
+              <CustomLink
                 to="/manageInventories"
                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Manage Inventories
-              </Link>
+              </CustomLink>
             </li>
             <li>
-              <Link
+              <CustomLink
                 to="/addinventory"
                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Add Inventory
-              </Link>
+              </CustomLink>
             </li>
             {user && (
               <li>
-                <Link
+                <CustomLink
                   to="/myitem"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   My Items
-                </Link>
+                </CustomLink>
               </li>
             )}
 
             <li>
-              <Link
-                to="/"
+              <CustomLink
+                to="/about"
                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 About
-              </Link>
+              </CustomLink>
             </li>
             <li>
-              <Link
-                to="/"
+              <CustomLink
+                to="/contact"
                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 Contact
-              </Link>
+              </CustomLink>
             </li>
             {user ? (
               <li>
-                <Link
-                  to="/"
+                <CustomLink
+                  to="/login"
                   onClick={() => {
                     signOut(auth);
-                    navigate("/login");
                   }}
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Sign out
-                </Link>
+                </CustomLink>
               </li>
             ) : (
               <>
                 <li>
-                  <Link
+                  <CustomLink
                     to="/register"
                     className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Register
-                  </Link>
+                  </CustomLink>
                 </li>
                 <li>
-                  <Link
+                  <CustomLink
                     to="/login"
                     className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Login
-                  </Link>
+                  </CustomLink>
                 </li>
               </>
             )}

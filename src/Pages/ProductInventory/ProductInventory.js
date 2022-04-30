@@ -55,7 +55,7 @@ const ProductInventory = () => {
       .then((data) => {});
   };
   return (
-    <div className="flex justify-center items-center my-20">
+    <div className="flex justify-center items-center my-20 min-h-screen">
       <div>
         <img src={product?.image} alt="" />
       </div>
