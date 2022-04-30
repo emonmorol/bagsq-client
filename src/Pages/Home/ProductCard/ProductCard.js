@@ -2,14 +2,13 @@ import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const { name, description, image, quantity, price, supplier, _id } = product;
   const navigate = useNavigate();
   return (
     <div className="py-5">
-      <div className="border-[0.1px] bg-white  max-w-sm flex justify-center items-center  mx-auto hover:shadow-xl transition-all rounded-xl overflow-hidden">
+      <div className="shadow bg-white  max-w-sm flex justify-center items-center  mx-auto hover:shadow-xl transition-all rounded-xl overflow-hidden">
         <div>
           <div className="w-3/4 px-3 py-4 mx-auto">
             <img src={image} alt="" />

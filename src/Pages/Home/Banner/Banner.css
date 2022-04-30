@@ -22,11 +22,6 @@
   font-size: 50px;
   text-align: center;
 }
-.inside-banner p {
-  color: white;
-  width: 30ch;
-  text-align: center;
-}
 .inside-banner a {
   background-color: #37caff;
   padding: 5px 20px;

@@ -14,12 +14,14 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 z-50">
-      <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link to="/" className="flex items-center">
-          <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white w-1/4">
-            <img src={bagsq} alt="" />
-          </span>
-        </Link>
+      <div className="flex justify-between items-center mx-auto">
+        <div>
+          <Link to="/" className="flex items-center">
+            <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white w-1/4">
+              <img src={bagsq} alt="" />
+            </span>
+          </Link>
+        </div>
         <div className="flex items-center md:order-2">
           <button
             type="button"
@@ -28,7 +30,7 @@ const Navbar = () => {
             aria-expanded="false"
             data-dropdown-toggle="dropdown"
           >
-            {/* <span className="sr-only">Open user menu</span> */}
+            <span className="sr-only">Open user menu</span>
             <img
               className="w-8 h-8 rounded-full"
               onClick={() => setUserClicked(!userClicked)}

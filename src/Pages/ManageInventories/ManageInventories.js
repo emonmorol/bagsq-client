@@ -1,4 +1,4 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -92,7 +92,7 @@ const ManageInventories = () => {
       </div>
       <div className="my-5 mx-auto mb-12">
         <Link to="/addinventory" className="bg-blue-300 py-2 px-10">
-          Add Inventory
+          Add Inventory <FontAwesomeIcon icon={faPlus} />
         </Link>
       </div>
     </div>

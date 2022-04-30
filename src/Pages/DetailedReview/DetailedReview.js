@@ -22,7 +22,7 @@ const DetailedReview = () => {
             <p className="text-sm">{review.email}</p>
           </div>
         </div>
-        <p className="w-[80ch]">{review.context}</p>
+        <p className="w-[80ch] leading-8">{review.context}</p>
       </div>
     </div>
   );
