@@ -10,12 +10,14 @@ const AddInventory = () => {
   const { register, handleSubmit, reset } = useForm();
   const [user] = useAuthState(auth);
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/addinventory", data).then((response) => {
-      if (response) {
-        toast("Inventory Product Added");
-        reset();
-      }
-    });
+    axios
+      .post("https://bagsqhike.herokuapp.com/addinventory", data)
+      .then((response) => {
+        if (response) {
+          toast("Inventory Product Added");
+          reset();
+        }
+      });
   };
 
   return (

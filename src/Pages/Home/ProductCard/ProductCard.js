@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
-  const { name, description, image, quantity, price, _id } = product;
+  const { name, description, image, quantity, price, supplier, _id } = product;
   const navigate = useNavigate();
   return (
     <div className="py-5">
@@ -26,7 +26,9 @@ const ProductCard = ({ product }) => {
             <span className="block text-gray-600 text-sm">
               {description.slice(0, 80)} ...
             </span>
-
+            <span>
+              <small>Supplier : {supplier}</small>
+            </span>
             <div className="flex justify-between pt-1">
               <span>
                 <span>Rating : </span>{" "}

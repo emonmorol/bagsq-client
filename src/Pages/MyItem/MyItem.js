@@ -10,7 +10,7 @@ const MyItem = () => {
   const [myInventory, setMyInventory] = useState([]);
 
   useEffect(() => {
-    const url = `http://localhost:5000/myitem?email=${user?.email}`;
+    const url = `https://bagsqhike.herokuapp.com/myitem?email=${user?.email}`;
     axios(url).then((response) => {
       setMyInventory(response.data);
     });
@@ -19,7 +19,7 @@ const MyItem = () => {
   const handleDelete = (id) => {
     const proceed = window.confirm("Are Your Sure? You want To Delete??");
     if (proceed) {
-      const url = `http://localhost:5000/inventory/${id}`;
+      const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
       fetch(url, {
         method: "DELETE",
       })

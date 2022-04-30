@@ -11,7 +11,7 @@ const ProductInventory = () => {
 
   //finding  product using id
   useEffect(() => {
-    const url = `http://localhost:5000/inventory/${id}`;
+    const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -26,7 +26,7 @@ const ProductInventory = () => {
     const stock = event.target.stock.value;
     const updatedQuantity = +newQuantity + parseInt(stock);
     setNewQuantity(updatedQuantity);
-    const url = `http://localhost:5000/update/${id}`;
+    const url = `https://bagsqhike.herokuapp.com/update/${id}`;
     fetch(url, {
       method: "PATCH",
       headers: {
@@ -43,7 +43,7 @@ const ProductInventory = () => {
   const handleDelivered = () => {
     const updatedQuantity = newQuantity - 1;
     setNewQuantity(updatedQuantity);
-    const url = `http://localhost:5000/update/${id}`;
+    const url = `https://bagsqhike.herokuapp.com/update/${id}`;
     fetch(url, {
       method: "PATCH",
       headers: {
