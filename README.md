@@ -31,3 +31,4 @@
 - Flowbite
 - HTML
 - CSS
+- jsonwebtoken

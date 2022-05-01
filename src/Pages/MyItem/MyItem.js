@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../fireabase.init";
 import MyItemCard from "./MyItemCard";
+import { signOut } from "firebase/auth";
 
 const MyItem = () => {
   const [user] = useAuthState(auth);
   const [myInventory, setMyInventory] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `http://localhost:5000/myitem?email=${user?.email}`;
-    axios(url, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("authorizationToken")}`,
-      },
-    }).then((response) => {
-      setMyInventory(response.data);
-    });
+    const url = `https://bagsqhike.herokuapp.com/myitem?email=${user?.email}`;
+    try {
+      axios(url, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("authorizationToken")}`,
+        },
+      }).then((response) => {
+        setMyInventory(response.data);
+      });
+    } catch (AxiosError) {
+      if (
+        AxiosError.response.status === 401 ||
+        AxiosError.response.status === 403
+      ) {
+        signOut(auth);
+        navigate("/login");
+        console.log("emon");
+      }
+    }
   }, [user]);
 
   const handleDelete = (id) => {

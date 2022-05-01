@@ -78,7 +78,7 @@ const Register = () => {
       await sendEmailVerification();
       toast("Name Updated");
       if (user) {
-        const url = `http://localhost:5000/account`;
+        const url = `https://bagsqhike.herokuapp.com/account`;
         fetch(url, {
           method: "POST",
           body: JSON.stringify({ email: user.email }),
