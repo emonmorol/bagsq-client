@@ -2,6 +2,7 @@ import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Loading from "../Shared/Loading/Loading";
 
 const ProductInventory = () => {
   const { id } = useParams();
@@ -54,81 +55,89 @@ const ProductInventory = () => {
       .then((res) => res.json())
       .then((data) => {});
   };
-  return (
-    <div className="flex justify-center items-center my-20 min-h-screen">
-      <div>
-        <img src={product?.image} alt="" />
-      </div>
-      <div className="py-4 px-4 bg-white">
-        <div>
-          <span className="flex justify-between py-2">
-            <span className="block text-3xl text-gray-600 font-bold tracking-wide">
-              {product?.name}
-            </span>
-          </span>
-          <span className="block text-gray-600 text-base my-5 w-[60ch]">
-            {product?.description}
-          </span>
 
-          <p className="font-extrabold text-3xl uppercase text-blue-400 my-4">
-            Price : ${product?.price}
-          </p>
-          <span className="text-2xl">
-            Available: <span className="font-bold">{newQuantity}</span> Pcs.
-          </span>
-          <p className="my-2">Supplier : {product?.supplier}</p>
-          <p className="my-2">Product Id : {product?._id}</p>
-          <span>
-            <span>Rating : </span>{" "}
-            <span className="text-blue-400">
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStarHalfStroke} />
-            </span>
-          </span>
-        </div>
-        <form onSubmit={handleUpdateStock} className="flex items-center">
-          <div className="relative my-4">
-            <input
-              type="number"
-              name="stock"
-              id="floating_outlined"
-              className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
-              placeholder=" "
-            />
-            <label
-              htmlFor="floating_outlined"
-              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-            >
-              Update Stock
-            </label>
+  if (newQuantity === 0) {
+    return <Loading />;
+  }
+  if (newQuantity) {
+    return (
+      <div className="flex justify-center items-center mt-20 mb-40">
+        <div className="bg-white flex justify-center items-center py-6 shadow-lg rounded-2xl">
+          <div>
+            <img src={product?.image} alt="" />
           </div>
-          <button
-            type="submit"
-            className="py-3 px-4 bg-gray-500 font-semibold uppercase text-white"
-          >
-            Update
-          </button>
-        </form>
-        <div>
-          <button
-            onClick={handleDelivered}
-            className="bg-blue-300 py-1 px-10 my-10 rounded mr-5"
-          >
-            delivered
-          </button>
-          <Link
-            className="bg-blue-300 py-1 px-10 my-10 rounded"
-            to="/manageInventories"
-          >
-            Manage Inventories
-          </Link>
+          <div className="py-4 px-4 bg-white">
+            <div>
+              <span className="flex justify-between py-2">
+                <span className="block text-3xl text-gray-600 font-bold tracking-wide">
+                  {product?.name}
+                </span>
+              </span>
+              <span className="block text-gray-600 text-base my-5 w-[60ch]">
+                {product?.description}
+              </span>
+
+              <p className="font-extrabold text-3xl uppercase text-blue-400 my-4">
+                Price : ${product?.price}
+              </p>
+              <span className="text-2xl">
+                Available: <span className="font-bold">{newQuantity}</span> Pcs.
+              </span>
+              <p className="my-2">Supplier : {product?.supplier}</p>
+              <p className="my-2">Product Id : {product?._id}</p>
+              <span>
+                <span>Rating : </span>{" "}
+                <span className="text-blue-400">
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStar} />
+                  <FontAwesomeIcon icon={faStarHalfStroke} />
+                </span>
+              </span>
+            </div>
+            <form onSubmit={handleUpdateStock} className="flex items-center">
+              <div className="relative my-4">
+                <input
+                  type="number"
+                  name="stock"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer border"
+                  placeholder=" "
+                />
+                <label
+                  htmlhtmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Update Stock
+                </label>
+              </div>
+              <button
+                type="submit"
+                className="py-3 px-4 bg-gray-500 font-semibold uppercase text-white"
+              >
+                Update
+              </button>
+            </form>
+            <div>
+              <button
+                onClick={handleDelivered}
+                className="bg-blue-300 py-1 px-10 my-10 rounded mr-5"
+              >
+                delivered
+              </button>
+              <Link
+                className="bg-blue-300 py-1 px-10 my-10 rounded"
+                to="/manageInventories"
+              >
+                Manage Inventories
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ProductInventory;

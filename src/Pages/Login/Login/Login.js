@@ -31,6 +31,18 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
+      const url = `http://localhost:5000/account`;
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify({ email: user.email }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          localStorage.setItem("authorizationToken", data.token);
+        });
       navigate(from, { replace: true });
     }
   }, [user]);
@@ -99,7 +111,7 @@ const Login = () => {
                   placeholder=" "
                 />
                 <label
-                  for="floating_outlined"
+                  htmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Email
@@ -118,7 +130,7 @@ const Login = () => {
                   placeholder=" "
                 />
                 <label
-                  for="floating_outlined1"
+                  htmlFor="floating_outlined1"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Password
@@ -142,8 +154,8 @@ const Login = () => {
                     <svg
                       className="h-6 w-6"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

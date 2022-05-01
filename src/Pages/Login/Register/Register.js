@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
@@ -78,6 +78,18 @@ const Register = () => {
       await sendEmailVerification();
       toast("Name Updated");
       if (user) {
+        const url = `http://localhost:5000/account`;
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify({ email: user.email }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem("authorizationToken", data.token);
+          });
         navigate(from, { replace: true });
       }
     }
@@ -110,7 +122,7 @@ const Register = () => {
                   placeholder=" "
                 />
                 <label
-                  htmlFor="floating_outlined"
+                  htmlhtmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Full name
@@ -126,7 +138,7 @@ const Register = () => {
                   placeholder=" "
                 />
                 <label
-                  htmlFor="floating_outlined"
+                  htmlhtmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Email
@@ -145,7 +157,7 @@ const Register = () => {
                   placeholder=" "
                 />
                 <label
-                  htmlFor="floating_outlined"
+                  htmlhtmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Enter Your Password
@@ -166,7 +178,7 @@ const Register = () => {
                   placeholder=" "
                 />
                 <label
-                  htmlFor="floating_outlined"
+                  htmlhtmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Confirm Your Password

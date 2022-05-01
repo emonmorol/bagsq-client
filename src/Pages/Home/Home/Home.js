@@ -1,4 +1,6 @@
 import React from "react";
+import useProducts from "../../../Hooks/useProducts";
+import Loading from "../../Shared/Loading/Loading";
 import Banner from "../Banner/Banner";
 import Benefits from "../Benefites/Benefits";
 import CountOurNumbers from "../CountOurNumbers/CountOurNumbers";
@@ -8,17 +10,22 @@ import Reviews from "../Reviews/Reviews";
 import Strength from "../Strength/Strength";
 
 const Home = () => {
-  return (
-    <>
-      <Banner />
-      <Faciliteis />
-      <Products />
-      <Strength />
-      <CountOurNumbers />
-      <Benefits />
-      <Reviews />
-    </>
-  );
+  const [products] = useProducts([]);
+  if (!products) {
+    return <Loading />;
+  } else {
+    return (
+      <>
+        <Banner />
+        <Faciliteis />
+        <Products />
+        <Strength />
+        <CountOurNumbers />
+        <Benefits />
+        <Reviews />
+      </>
+    );
+  }
 };
 
 export default Home;

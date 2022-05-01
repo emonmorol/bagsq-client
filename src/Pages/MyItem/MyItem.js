@@ -10,8 +10,12 @@ const MyItem = () => {
   const [myInventory, setMyInventory] = useState([]);
 
   useEffect(() => {
-    const url = `https://bagsqhike.herokuapp.com/myitem?email=${user?.email}`;
-    axios(url).then((response) => {
+    const url = `http://localhost:5000/myitem?email=${user?.email}`;
+    axios(url, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("authorizationToken")}`,
+      },
+    }).then((response) => {
       setMyInventory(response.data);
     });
   }, [user]);
