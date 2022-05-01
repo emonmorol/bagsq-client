@@ -12,7 +12,7 @@ const Reviews = () => {
     );
   }, []);
   return (
-    <div className="review-container">
+    <div id="reviews" className="review-container">
       <h2 className="text-center text-3xl font-extrabold">What People say</h2>
       <h3 className="text-center text-3xl font-extrabold text-blue-400">
         About Us

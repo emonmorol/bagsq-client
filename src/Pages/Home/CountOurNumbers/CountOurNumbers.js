@@ -12,9 +12,9 @@ const CountOurNumbers = () => {
   return (
     <div className="count-banner-content">
       <div className="count-banner">
-        <div className="count-inside-banner px-5">
-          <div className="grid grid-cols-4">
-            <div className="mx-24 text-white flex flex-col justify-center">
+        <div className="count-inside-banner px-5 py-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            <div className="lg:mx-24 text-white flex flex-col justify-center">
               <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faUser} />
               </div>
@@ -25,7 +25,7 @@ const CountOurNumbers = () => {
                 </p>
               </div>
             </div>
-            <div className="mx-24 text-white flex flex-col justify-center">
+            <div className="lg:mx-24 text-white flex flex-col justify-center">
               <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faBriefcase} />
               </div>
@@ -34,7 +34,7 @@ const CountOurNumbers = () => {
                 <p className="text-2xl my-2 uppercase font-mono">Unique Bags</p>
               </div>
             </div>
-            <div className="mx-24 text-white flex flex-col justify-center">
+            <div className="lg:mx-24 text-white flex flex-col justify-center">
               <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faPenNib} />
               </div>
@@ -43,7 +43,7 @@ const CountOurNumbers = () => {
                 <p className="text-2xl my-2 uppercase font-mono">Companies</p>
               </div>
             </div>
-            <div className="mx-24 text-white flex flex-col justify-center">
+            <div className="lg:mx-24 text-white flex flex-col justify-center">
               <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faPeopleGroup} />
               </div>

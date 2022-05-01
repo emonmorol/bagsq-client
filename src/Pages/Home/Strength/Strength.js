@@ -15,9 +15,8 @@ const Strength = () => {
           Our <span className="text-blue-500">Strength</span>
         </h2>
         <p className="my-2">
-          Get great deals every day at BagsQ. Shop online and browse through our
-          massive range of bags, with great deals on hiking, school, formal, and
-          so much more type of bags. <br />
+          Our objective is to Reduce our clients overall Logistics Cost and
+          Increase their Customer Order Servicability <br />
         </p>
         <br />
         <div className="line-container flex items-center">
