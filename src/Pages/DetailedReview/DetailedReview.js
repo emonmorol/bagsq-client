@@ -11,7 +11,7 @@ const DetailedReview = () => {
     axios(url).then((response) => setReview(response.data));
   });
   return (
-    <div className="lg:mx-80 min-h-[80vh] flex justify-center items-center">
+    <div className="lg:mx-80 p-4 min-h-[80vh] lg:flex justify-center items-center">
       <div className="border pt-6 pb-12 px-10 shadow-md rounded-3xl border-t-8 border-t-blue-400">
         <div className="flex items-center my-5">
           <div className="rounded-full border-8 mr-5 shadow-lg">
@@ -22,7 +22,7 @@ const DetailedReview = () => {
             <p className="text-sm">{review.email}</p>
           </div>
         </div>
-        <p className="w-[80ch] leading-8">{review.context}</p>
+        <p className="lg:w-[80ch] leading-8">{review.context}</p>
       </div>
     </div>
   );
