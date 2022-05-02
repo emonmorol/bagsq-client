@@ -14,10 +14,14 @@ import Loading from "../../Shared/Loading/Loading";
 import Social from "../Social/Social";
 
 const Login = () => {
+  // <-------------------------> react firebase hooks<------------------------->
+
   const [signInWithEmailAndPassword, hookUser, loading, hookError] =
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
   const [user] = useAuthState(auth);
+
+  //<-------------------------> react hooks <------------------------->
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({
@@ -30,6 +34,7 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
+    //<-------------------------> creating json token <------------------------->
     if (user) {
       const url = `https://bagsqhike.herokuapp.com/account`;
       fetch(url, {
@@ -51,6 +56,7 @@ const Login = () => {
     return <Loading />;
   }
 
+  //<-------------------------> getting email input and error handling <------------------------->
   const handleEmailInput = (e) => {
     if (/^\S+@\S+\.\S+$/.test(e.target.value)) {
       setErrors({ ...errors, emailError: " " });
@@ -60,6 +66,8 @@ const Login = () => {
       setEmail("");
     }
   };
+
+  // <-------------------------> getting password input and error handling <------------------------->
   const handlePasswordInput = (e) => {
     if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(e.target.value)) {
       setPassword(e.target.value);
@@ -70,10 +78,13 @@ const Login = () => {
     }
   };
 
+  // <------------------------->   login onSubmit <------------------------->
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(email, password);
   };
+
+  // <------------------------->  sent password reset email <------------------------->
 
   const handleResetPass = async () => {
     if (email) {
@@ -91,7 +102,9 @@ const Login = () => {
           <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">
             Login to your account
           </div>
+
           <Social />
+
           <div className="relative mt-10 h-px bg-gray-300">
             <div className="absolute left-0 top-0 flex justify-center w-full -mt-2">
               <span className="bg-white px-4 text-xs text-gray-500 uppercase">
@@ -99,7 +112,10 @@ const Login = () => {
               </span>
             </div>
           </div>
+
           <div className="mt-10">
+            {/* <-------------------------> form <---------------------->*/}
+
             <form onSubmit={handleLogin}>
               <div className="relative my-4">
                 <input
@@ -117,6 +133,8 @@ const Login = () => {
                   Enter Your Email
                 </label>
               </div>
+
+              {/*<-------------------------> showing error <------------------------->*/}
               {errors?.emailError && (
                 <p className="text-center text-red-500">{errors.emailError}</p>
               )}

@@ -61,19 +61,19 @@ const ProductInventory = () => {
   }
   if (newQuantity) {
     return (
-      <div className="flex justify-center items-center mt-20 mb-40">
-        <div className="bg-white flex justify-center items-center py-6 shadow-lg rounded-2xl">
-          <div>
+      <div className="lg:flex justify-center items-center mt-20 mb-40 px-4">
+        <div className="bg-white lg:flex justify-center items-center py-6 shadow-lg rounded-2xl">
+          <div className="w-4/5 mx-auto">
             <img src={product?.image} alt="" />
           </div>
-          <div className="py-4 px-4 bg-white">
+          <div className="w-full py-4 px-4 bg-white">
             <div>
               <span className="flex justify-between py-2">
                 <span className="block text-3xl text-gray-600 font-bold tracking-wide">
                   {product?.name}
                 </span>
               </span>
-              <span className="block text-gray-600 text-base my-5 w-[60ch]">
+              <span className="block text-gray-600 text-base my-5 lg:w-[60ch]">
                 {product?.description}
               </span>
 
@@ -106,7 +106,7 @@ const ProductInventory = () => {
                   placeholder=" "
                 />
                 <label
-                  htmlhtmlFor="floating_outlined"
+                  htmlFor="floating_outlined"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Update Stock
@@ -119,15 +119,15 @@ const ProductInventory = () => {
                 Update
               </button>
             </form>
-            <div>
+            <div className="flex flex-col lg:flex-row">
               <button
                 onClick={handleDelivered}
-                className="bg-blue-300 py-1 px-10 my-10 rounded mr-5"
+                className="text-center bg-blue-300 py-1 px-10 my-2 lg:my-10 rounded lg:mr-5"
               >
-                delivered
+                Delivered
               </button>
               <Link
-                className="bg-blue-300 py-1 px-10 my-10 rounded"
+                className="text-center bg-blue-300 py-1 px-10 my-2 lg:my-10 rounded"
                 to="/manageInventories"
               >
                 Manage Inventories

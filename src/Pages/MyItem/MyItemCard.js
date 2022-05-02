@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const MyItemCard = ({ item, handleDelete }) => {
-  const { name, description, image, quantity, price, _id } = item;
+  const { name, description, image, quantity, price, supplier, _id } = item;
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,9 @@ const MyItemCard = ({ item, handleDelete }) => {
             <span className="block text-gray-600 text-sm">
               {description.slice(0, 50)}...
             </span>
-
+            <span>
+              <small>Supplier : {supplier}</small>
+            </span>
             <div className="flex justify-between pt-1">
               <span>
                 <span>Rating : </span>{" "}

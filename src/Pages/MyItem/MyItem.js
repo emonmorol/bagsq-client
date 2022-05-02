@@ -21,14 +21,10 @@ const MyItem = () => {
       }).then((response) => {
         setMyInventory(response.data);
       });
-    } catch (AxiosError) {
-      if (
-        AxiosError.response.status === 401 ||
-        AxiosError.response.status === 403
-      ) {
+    } catch (error) {
+      if (error.response.status === 401 || error.response.status === 403) {
         signOut(auth);
         navigate("/login");
-        console.log("emon");
       }
     }
   }, [user]);
@@ -53,13 +49,13 @@ const MyItem = () => {
   return (
     <div className="py-14 flex flex-col justify-center min-h-screen">
       <h1 className="text-center">Products That You've Added</h1>
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 lg:px-28 pt-5">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 lg:px-28 pt-5">
         {myInventory.map((item) => (
           <MyItemCard key={item._id} item={item} handleDelete={handleDelete} />
         ))}
       </div>
       <Link
-        className="bg-teal-100 hover:bg-blue-300 py-1 w-1/6 mx-auto my-3 rounded text-center"
+        className="bg-teal-100 hover:bg-blue-300 py-1 w-1/2 lg:w-1/6 mx-auto my-3 rounded text-center"
         to="/manageInventories"
       >
         Manage Inventories

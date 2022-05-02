@@ -6,16 +6,16 @@ import notFoundImage from "../../../Images/notFound.png";
 
 const NotFound = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="lg:flex justify-center items-center min-h-screen">
       <div>
         <img src={notFoundImage} alt="" />
       </div>
-      <div>
+      <div className="w-full px-4">
         <p className="text-6xl font-extrabold text-red-400">404 ERROR</p>
         <p className="text-2xl font-extrabold text-gray-400">
           Oops!! Page Not Found
         </p>
-        <p className="w-[60ch] my-4">
+        <p className="lg:w-[60ch] my-4">
           The page you are looking for is not available right now or link may be
           broken or the page is removed by author.
         </p>

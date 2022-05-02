@@ -14,11 +14,11 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 z-50">
-      <div className="flex justify-between items-center mx-auto">
-        <div>
-          <Link to="/" className="flex items-center">
-            <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white w-1/4">
-              <img src={bagsq} alt="" />
+      <div className="flex justify-evenly items-center mx-auto">
+        <div className="lg:w-[20%] w-[70%]">
+          <Link to="/" className="inline mr-0 w-1/3">
+            <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white">
+              <img className="w-1/3" src={bagsq} alt="" />
             </span>
           </Link>
         </div>
@@ -41,7 +41,7 @@ const Navbar = () => {
 
           <div
             className={`z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
-              userClicked ? "block" : "hidden"
+              userClicked ? "flex" : "hidden"
             }`}
             id="dropdown"
             data-popper-reference-hidden=""
@@ -54,60 +54,62 @@ const Navbar = () => {
               margin: " 0px",
             }}
           >
-            {user && (
-              <>
-                <div className="py-3 px-4 z-50">
-                  <span className="block text-sm text-gray-900 dark:text-white">
-                    {user?.displayName}
-                  </span>
-                  <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-                    {user?.email}
-                  </span>
-                </div>
-              </>
-            )}
-            <ul className="py-1" aria-labelledby="dropdown">
-              <li>
-                <CustomLink
-                  to="/dashboard"
-                  className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Dashboard
-                </CustomLink>
-              </li>
-              {user ? (
+            <div>
+              {user && (
+                <>
+                  <div className="py-3 px-4 z-50">
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      {user?.displayName}
+                    </span>
+                    <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+                      {user?.email}
+                    </span>
+                  </div>
+                </>
+              )}
+              <ul className="py-1" aria-labelledby="dropdown">
                 <li>
                   <CustomLink
-                    to="/login"
-                    onClick={() => {
-                      signOut(auth);
-                    }}
+                    to="/dashboard"
                     className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    Sign out
+                    Dashboard
                   </CustomLink>
                 </li>
-              ) : (
-                <>
-                  <li>
-                    <CustomLink
-                      to="/register"
-                      className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Register
-                    </CustomLink>
-                  </li>
+                {user ? (
                   <li>
                     <CustomLink
                       to="/login"
+                      onClick={() => {
+                        signOut(auth);
+                      }}
                       className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      Login
+                      Sign out
                     </CustomLink>
                   </li>
-                </>
-              )}
-            </ul>
+                ) : (
+                  <>
+                    <li>
+                      <CustomLink
+                        to="/register"
+                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Register
+                      </CustomLink>
+                    </li>
+                    <li>
+                      <CustomLink
+                        to="/login"
+                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Login
+                      </CustomLink>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
           </div>
           <button
             data-collapse-toggle="mobile-menu-2"
@@ -149,9 +151,9 @@ const Navbar = () => {
         </div>
         <div
           className={`${
-            menuClicked ? "block" : "hidden"
+            menuClicked ? "block absolute bg-white top-14" : "hidden"
           } justify-between items-center w-full md:flex md:w-auto md:order-1"
-          id="mobile-menu-2 z-50`}
+          id="mobile-menu-2 z-50 px-5 leading-9`}
         >
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li>

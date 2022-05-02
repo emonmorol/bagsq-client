@@ -12,8 +12,8 @@ const CountOurNumbers = () => {
   return (
     <div className="count-banner-content">
       <div className="count-banner">
-        <div className="count-inside-banner px-5 py-5">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+        <div className="count-inside-banner">
+          <div className="grid grid-cols-2 gap-7 lg:grid-cols-4">
             <div className="lg:mx-24 text-white flex flex-col justify-center">
               <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faUser} />

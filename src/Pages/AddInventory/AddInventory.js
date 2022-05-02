@@ -10,6 +10,7 @@ const AddInventory = () => {
   const { register, handleSubmit, reset } = useForm();
   const [user] = useAuthState(auth);
   const onSubmit = (data) => {
+    // <-------------------------> posting new inventory <-------------------------> //
     axios
       .post("https://bagsqhike.herokuapp.com/addinventory", data)
       .then((response) => {
@@ -21,9 +22,9 @@ const AddInventory = () => {
   };
 
   return (
-    <div>
+    <div className="px-4">
       <form
-        className="flex flex-col mx-auto justify-center lg:w-1/2 w-5/6 lg:p-24 p-5 my-8 rounded-2xl shadow-lg"
+        className="flex flex-col mx-auto justify-center lg:w-1/2 w-full lg:p-24 p-5 my-8 rounded-2xl shadow-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="w-full mt-2 mb-6">
