@@ -29,10 +29,9 @@ const MyItem = () => {
     }
   }, [user]);
 
-  const handleDelete = (id) => {
-    const proceed = window.confirm("Are Your Sure? You want To Delete??");
-    if (proceed) {
-      const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
+  const handleDelete = (id, confirmation) => {
+    const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
+    if (confirmation) {
       fetch(url, {
         method: "DELETE",
       })
@@ -47,20 +46,26 @@ const MyItem = () => {
   };
 
   return (
-    <div className="py-14 flex flex-col justify-center min-h-screen">
-      <h1 className="text-center">Products That You've Added</h1>
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 lg:px-28 pt-5">
-        {myInventory.map((item) => (
-          <MyItemCard key={item._id} item={item} handleDelete={handleDelete} />
-        ))}
+    <>
+      <div className="py-14 flex flex-col justify-center min-h-screen">
+        <h1 className="text-center">Products That You've Added</h1>
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 lg:px-28 pt-5">
+          {myInventory.map((item) => (
+            <MyItemCard
+              key={item._id}
+              item={item}
+              handleDelete={handleDelete}
+            />
+          ))}
+        </div>
+        <Link
+          className="bg-teal-100 hover:bg-blue-300 py-1 w-1/2 lg:w-1/6 mx-auto my-3 rounded text-center"
+          to="/manageInventories"
+        >
+          Manage Inventories
+        </Link>
       </div>
-      <Link
-        className="bg-teal-100 hover:bg-blue-300 py-1 w-1/2 lg:w-1/6 mx-auto my-3 rounded text-center"
-        to="/manageInventories"
-      >
-        Manage Inventories
-      </Link>
-    </div>
+    </>
   );
 };
 

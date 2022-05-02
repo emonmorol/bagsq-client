@@ -73,7 +73,10 @@ const Login = () => {
       setPassword(e.target.value);
       setErrors({ ...errors, passwordError: "" });
     } else {
-      setErrors({ ...errors, passwordError: "Please Input valid password!" });
+      setErrors({
+        ...errors,
+        passwordError: `Password Must Contains : Minimum One Number,One Uppercase Letter and One Lowercase Letter`,
+      });
       setPassword("");
     }
   };
