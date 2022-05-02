@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import "./CountOurNumbers.css";
+import CountUp from "react-countup";
+import VisibilitySensor from "react-visibility-sensor";
 
 const CountOurNumbers = () => {
   return (
@@ -15,31 +17,49 @@ const CountOurNumbers = () => {
         <div className="count-inside-banner">
           <div className="grid grid-cols-2 gap-7 lg:grid-cols-4">
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <div className="text-center">
-                <p className="text-4xl my-2">5628</p>
+                <CountUp start={0} end={5628} duration={3}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span className="text-4xl my-2" ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
                 <p className="text-2xl my-2 uppercase font-mono">
                   current USERS
                 </p>
               </div>
             </div>
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faBriefcase} />
               </div>
               <div className="text-center">
-                <p className="text-4xl my-2">528</p>
+                <CountUp start={0} end={528} duration={3}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span className="text-4xl my-2" ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
                 <p className="text-2xl my-2 uppercase font-mono">Unique Bags</p>
               </div>
             </div>
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
                 <FontAwesomeIcon icon={faPenNib} />
               </div>
               <div className="text-center">
-                <p className="text-4xl my-2">374</p>
+                <CountUp start={0} end={374} duration={3}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span className="text-4xl my-2" ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
                 <p className="text-2xl my-2 uppercase font-mono">Companies</p>
               </div>
             </div>
@@ -48,7 +68,13 @@ const CountOurNumbers = () => {
                 <FontAwesomeIcon icon={faPeopleGroup} />
               </div>
               <div className="text-center">
-                <p className="text-4xl my-2">89</p>
+                <CountUp start={0} end={23} duration={3}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span className="text-4xl my-3" ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
                 <p className="text-2xl my-2 uppercase font-mono">
                   Team members
                 </p>

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../fireabase.init";
 import MyItemCard from "./MyItemCard";
 import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const MyItem = () => {
   const [user] = useAuthState(auth);
@@ -41,6 +42,7 @@ const MyItem = () => {
             (product) => product._id !== id
           );
           setMyInventory(remainingProducts);
+          toast("Item Deletation Complete");
         });
     }
   };

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import useProducts from "../../Hooks/useProducts";
 
 const ManageInventories = () => {
@@ -45,6 +46,7 @@ const ManageInventories = () => {
             (product) => product._id !== id
           );
           setProducts(remainingProducts);
+          toast("Item Deletation Complete");
         });
     }
   };
