@@ -1,4 +1,10 @@
-import { faUserMd } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBox,
+  faClockRotateLeft,
+  faHandHoldingDollar,
+  faPeopleArrowsLeftRight,
+  faUserMd,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import benefits from "../../../Images/benefits.png";
@@ -24,7 +30,7 @@ const Benefits = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           <div className="strength-option shadow hover:shadow-lg transition-all duration-300">
             <p className="strength-icon">
-              <FontAwesomeIcon icon={faUserMd} />
+              <FontAwesomeIcon icon={faBox} />
             </p>
             <h3 className="font-bold text-md my-2 uppercase">
               Parts Inventory
@@ -37,7 +43,7 @@ const Benefits = () => {
 
           <div className="strength-option shadow hover:shadow-lg transition-all duration-300">
             <p className="strength-icon">
-              <FontAwesomeIcon icon={faUserMd} />
+              <FontAwesomeIcon icon={faHandHoldingDollar} />
             </p>
             <h3 className="font-bold text-md my-2 uppercase">
               Flexible Pricing Levels
@@ -50,7 +56,7 @@ const Benefits = () => {
 
           <div className="strength-option shadow hover:shadow-lg transition-all duration-300">
             <p className="strength-icon">
-              <FontAwesomeIcon icon={faUserMd} />
+              <FontAwesomeIcon icon={faPeopleArrowsLeftRight} />
             </p>
             <h3 className="font-bold text-md my-2 uppercase">Support Team</h3>
             <p className="text-xs leading-4">
@@ -61,7 +67,7 @@ const Benefits = () => {
 
           <div className="strength-option shadow hover:shadow-lg transition-all duration-300">
             <p className="strength-icon">
-              <FontAwesomeIcon icon={faUserMd} />
+              <FontAwesomeIcon icon={faClockRotateLeft} />
             </p>
             <h3 className="font-bold text-md my-2 uppercase">
               Service History

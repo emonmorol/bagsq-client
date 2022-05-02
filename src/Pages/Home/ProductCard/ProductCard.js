@@ -44,7 +44,10 @@ const ProductCard = ({ product }) => {
                   <FontAwesomeIcon icon={faStarHalfStroke} />
                 </span>
               </span>
-              <span>Available: {quantity} Pcs.</span>
+              <span>
+                Available: {quantity === 0 ? "Sold Out" : quantity}
+                {quantity === 0 ? "" : "Pcs."}
+              </span>
             </div>
           </div>
           <button
