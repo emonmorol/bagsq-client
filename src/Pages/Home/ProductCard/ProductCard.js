@@ -10,13 +10,13 @@ const ProductCard = ({ product }) => {
     <div className="py-5">
       <div className="shadow bg-white  max-w-sm flex justify-center items-center  mx-auto hover:shadow-xl transition-all rounded-xl overflow-hidden">
         <div>
-          {/* product image */}
+          {/*<-------------------------> product image<-------------------------> */}
 
           <div className="w-3/4 px-3 py-4 mx-auto">
             <img src={image} alt="" />
           </div>
 
-          {/* Product detail */}
+          {/*<-------------------------> Product detail <------------------------->*/}
 
           <div className="py-4 px-4 bg-white">
             <span className="flex justify-between py-2">

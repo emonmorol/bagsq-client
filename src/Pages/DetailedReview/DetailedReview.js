@@ -12,7 +12,7 @@ const DetailedReview = () => {
   });
   return (
     <div className="lg:mx-80 p-4 min-h-[80vh] lg:flex justify-center items-center">
-      <div className="border pt-6 pb-12 px-10 shadow-md rounded-3xl border-t-8 border-t-blue-400">
+      <div className="border pt-5 pb-12 px-5 lg:px-10 shadow-md rounded-3xl border-t-8 border-t-blue-400">
         <div className="flex items-center my-5">
           <div className="rounded-full border-8 mr-5 shadow-lg">
             <img className="rounded-full" src={review.image} alt="" />
