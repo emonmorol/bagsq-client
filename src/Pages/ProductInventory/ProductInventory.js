@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 const ProductInventory = () => {
   const { id } = useParams();
-  // const [products] = useProducts();
   const [product, setProduct] = useState({});
   const [newQuantity, setNewQuantity] = useState(0);
 
@@ -60,11 +59,6 @@ const ProductInventory = () => {
         });
     }
   };
-
-  // // if (newQuantity , 0) {
-  // //   return <Loading />;
-  // // }
-  // if (newQuantity) {
   return (
     <div className="lg:flex justify-center items-center mt-20 mb-40 px-4">
       <div className="bg-white lg:flex justify-center items-center py-6 shadow-lg rounded-2xl">

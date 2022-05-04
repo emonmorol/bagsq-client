@@ -6,7 +6,7 @@ import notFoundImage from "../../../Images/notFound.png";
 
 const NotFound = () => {
   return (
-    <div className="lg:flex justify-center items-center min-h-screen">
+    <div className="lg:flex mx-auto justify-center items-center min-h-screen">
       <div>
         <img src={notFoundImage} alt="" />
       </div>

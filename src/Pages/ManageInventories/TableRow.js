@@ -14,7 +14,9 @@ const TableRow = ({ product, handleDelete }) => {
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
+      borderRadius: "20px",
       transform: "translate(-50%, -50%)",
+      transition: "transform 1s",
     },
   };
   Modal.setAppElement(document.getElementById("root"));
@@ -54,6 +56,7 @@ const TableRow = ({ product, handleDelete }) => {
               onRequestClose={closeModal}
               style={customStyles}
               contentLabel="Example Modal"
+              overlayClassName="Overlay"
             >
               <button
                 onClick={closeModal}
