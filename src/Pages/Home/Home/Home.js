@@ -5,6 +5,7 @@ import Banner from "../Banner/Banner";
 import Benefits from "../Benefites/Benefits";
 import CountOurNumbers from "../CountOurNumbers/CountOurNumbers";
 import Faciliteis from "../Facilities/Faciliteis";
+import CorporateClient from "../CorporateClient/CorporateClient";
 import Products from "../Products/Products";
 import Reviews from "../Reviews/Reviews";
 import Strength from "../Strength/Strength";
@@ -23,6 +24,7 @@ const Home = () => {
         <CountOurNumbers />
         <Benefits />
         <Reviews />
+        <CorporateClient />
       </>
     );
   }

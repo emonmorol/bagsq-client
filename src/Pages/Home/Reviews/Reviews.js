@@ -13,9 +13,9 @@ const Reviews = () => {
   }, []);
   return (
     <div id="reviews" className="review-container">
-      <h2 className="text-center text-3xl font-extrabold">What People say</h2>
+      <h2 className="text-center text-3xl font-extrabold">Their Words</h2>
       <h3 className="text-center text-3xl font-extrabold text-blue-400">
-        About Us
+        Our Pride
       </h3>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 px-5 lg:px-36 my-10">
         {reviews.map((review) => (
