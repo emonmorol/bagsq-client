@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../fireabase.init";
 import bagsq from "../../Images/BagsQ.png";
-import { Bounce } from "react-reveal";
+import { Zoom } from "react-reveal";
 
 const AddInventory = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -23,7 +23,7 @@ const AddInventory = () => {
   };
 
   return (
-    <Bounce bottom>
+    <Zoom left>
       <div className="px-4">
         <form
           className="flex flex-col mx-auto justify-center lg:w-1/2 w-full lg:p-24 p-5 my-8 rounded-2xl shadow-lg"
@@ -98,7 +98,7 @@ const AddInventory = () => {
           </div>
         </form>
       </div>
-    </Bounce>
+    </Zoom>
   );
 };
 

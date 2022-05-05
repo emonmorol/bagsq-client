@@ -67,7 +67,7 @@ const MyItem = () => {
           ))}
         </div>
         <Link
-          className="bg-teal-100 hover:bg-blue-300 py-1 w-1/2 lg:w-1/6 mx-auto my-3 rounded text-center"
+          className="bg-teal-200 hover:bg-teal-400 py-1 w-1/2 lg:w-1/6 mx-auto my-3 text-center rounded-full font-semibold text-gray-500"
           to="/manageInventories"
         >
           Manage Inventories

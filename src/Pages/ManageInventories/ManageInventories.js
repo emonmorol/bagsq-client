@@ -74,7 +74,10 @@ const ManageInventories = () => {
         </Zoom>
       </div>
       <div className="my-5 mx-auto mb-12">
-        <Link to="/addinventory" className="bg-blue-300 py-2 px-10">
+        <Link
+          to="/addinventory"
+          className="bg-blue-300 py-2 px-10 rounded-full font-semibold text-gray-600"
+        >
           Add Inventory <FontAwesomeIcon icon={faPlus} />
         </Link>
       </div>
