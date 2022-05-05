@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../fireabase.init";
 import userImage from "../../../Images/userimage.png";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,9 +12,15 @@ const Navbar = () => {
   const [menuClicked, setMenuClicked] = useState(false);
   const [user] = useAuthState(auth);
 
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+
   return (
     <nav className="bg-white shadow-md border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 z-50">
       <div className="flex justify-evenly items-center mx-auto">
+        {/*------------------- logo ---------------------*/}
+
         <div className="lg:w-[20%] w-[70%]">
           <Link to="/" className="inline mr-0 w-1/3">
             <span className="self-center font-extrabold text-xl whitespace-nowrap dark:text-white">
@@ -38,6 +44,8 @@ const Navbar = () => {
               alt=""
             />
           </button>
+
+          {/*--------------------------- user image navigation ------------------------------*/}
 
           <div
             className={`z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
@@ -80,9 +88,7 @@ const Navbar = () => {
                   <li>
                     <CustomLink
                       to="/login"
-                      onClick={() => {
-                        signOut(auth);
-                      }}
+                      onClick={handleSignOut}
                       className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Sign out
@@ -149,6 +155,9 @@ const Navbar = () => {
             )}
           </button>
         </div>
+
+        {/*--------------------------- Header navigation ------------------------------*/}
+
         <div
           className={`${
             menuClicked ? "block absolute bg-white top-14" : "hidden"
@@ -212,9 +221,7 @@ const Navbar = () => {
               <li>
                 <CustomLink
                   to="/login"
-                  onClick={() => {
-                    signOut(auth);
-                  }}
+                  onClick={handleSignOut}
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Sign out
