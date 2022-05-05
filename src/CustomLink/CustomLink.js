@@ -10,7 +10,9 @@ const CustomLink = ({ children, to, ...props }) => {
       <Link
         style={{
           color: match ? "#4fa9e3" : "",
-          borderLeft: match ? "3px solid #4fa9e3" : "",
+          border: match ? "0.001px solid #4fa9e3" : "",
+          borderLeft: match ? "4px solid #4fa9e3" : "",
+
           padding: "2px 8px",
           borderRadius: "5px",
         }}
