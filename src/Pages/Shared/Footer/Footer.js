@@ -14,23 +14,23 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-300">
                 <li className="mb-4">
-                  <Link to="#" className=" hover:underline">
-                    About
+                  <Link to="/home" className=" hover:underline">
+                    Home
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="#" className="hover:underline">
-                    Careers
+                  <Link to="/addinventory" className="hover:underline">
+                    Add Inventory
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="#" className="hover:underline">
-                    Brand Center
+                  <Link to="/manageInventories" className="hover:underline">
+                    Manage Inventories
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="#" className="hover:underline">
-                    Blog
+                  <Link to="/blogs" className="hover:underline">
+                    Blogs
                   </Link>
                 </li>
               </ul>
