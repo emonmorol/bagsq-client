@@ -1,16 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loading from "../../Shared/Loading/Loading";
 import SingleReviews from "../SingleReview/SingleReviews";
 import "./Reviews.css";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios("https://bagsqhike.herokuapp.com/reviews").then((response) =>
-      setReviews(response.data)
-    );
+    axios("https://bagsqhike.herokuapp.com/reviews").then((response) => {
+      setReviews(response.data);
+      setIsLoading(false);
+    });
   }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div id="reviews" className="review-container">
       <h2 className="text-center text-3xl font-extrabold">Their Words</h2>

@@ -6,9 +6,10 @@ import { toast } from "react-toastify";
 import useProducts from "../../Hooks/useProducts";
 import TableRow from "./TableRow";
 import { Zoom } from "react-reveal";
+import Loading from "../Shared/Loading/Loading";
 
 const ManageInventories = () => {
-  const [products, setProducts] = useProducts([]);
+  const [products, isLoading, setProducts] = useProducts([]);
 
   const handleDelete = (id, confirmation) => {
     const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
@@ -26,6 +27,9 @@ const ManageInventories = () => {
         });
     }
   };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col justify-center min-h-screen">

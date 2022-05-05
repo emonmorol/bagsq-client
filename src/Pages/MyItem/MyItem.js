@@ -6,10 +6,12 @@ import auth from "../../fireabase.init";
 import MyItemCard from "./MyItemCard";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
+import Loading from "../Shared/Loading/Loading";
 
 const MyItem = () => {
   const [user] = useAuthState(auth);
   const [myInventory, setMyInventory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const MyItem = () => {
         },
       }).then((response) => {
         setMyInventory(response.data);
+        setIsLoading(false);
       });
     } catch (error) {
       if (error.response.status === 401 || error.response.status === 403) {
@@ -46,6 +49,9 @@ const MyItem = () => {
         });
     }
   };
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>

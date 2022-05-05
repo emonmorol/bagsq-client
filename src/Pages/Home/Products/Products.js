@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useProducts from "../../../Hooks/useProducts";
+import Loading from "../../Shared/Loading/Loading";
 import ProductCard from "../ProductCard/ProductCard";
 
 const Products = () => {
-  const [products] = useProducts([]);
+  const [products, isLoading] = useProducts([]);
   const limitedProducts = products.slice(0, 6);
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="py-14 flex flex-col justify-center min-h-screen">
