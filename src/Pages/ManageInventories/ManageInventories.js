@@ -1,4 +1,8 @@
-import { faArrowRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,19 +15,21 @@ import Loading from "../Shared/Loading/Loading";
 const ManageInventories = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [pages, setPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(0);
-  console.log(pageNumber, pages);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
+    setIsPageLoading(true);
     const url = `https://bagsqhike.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
-        setIsLoading(false);
         setPages(Math.ceil(data.count / limit));
+        setIsLoading(false);
+        setIsPageLoading(false);
       });
   }, [limit, pageNumber]);
 
@@ -53,46 +59,72 @@ const ManageInventories = () => {
         <h2 className="text-center my-3">All Inventories</h2>
         <Zoom bottom>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-8 py-3  border-x text-center">
-                    Product Image
-                  </th>
-                  <th scope="col" className="px-6 py-3  border-x text-center">
-                    Product name
-                  </th>
-                  <th scope="col" className="px-6 py-3  border-x text-center">
-                    Price
-                  </th>
-                  <th scope="col" className="px-6 py-3  border-x text-center">
-                    Quantity
-                  </th>
-                  <th scope="col" className="px-6 py-3  border-x text-center">
-                    Supplier
-                  </th>
-                  <th scope="col" className="px-6 py-3  border-x text-center">
-                    <span className="sr-only">Control</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <TableRow
-                    key={product._id}
-                    product={product}
-                    handleDelete={handleDelete}
-                  />
-                ))}
-              </tbody>
-            </table>
+            {isPageLoading ? (
+              <div className="mx-auto">
+                <Loading />
+              </div>
+            ) : (
+              <>
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-8 py-3  border-x text-center"
+                      >
+                        Product Image
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3  border-x text-center"
+                      >
+                        Product name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3  border-x text-center"
+                      >
+                        Price
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3  border-x text-center"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3  border-x text-center"
+                      >
+                        Supplier
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3  border-x text-center"
+                      >
+                        <span className="sr-only">Control</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map((product) => (
+                      <TableRow
+                        key={product._id}
+                        product={product}
+                        handleDelete={handleDelete}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
           </div>
         </Zoom>
         <div
           aria-label="Page navigation example"
-          className="my-6 flex justify-center font-xs  lg:justify-end items-center"
+          className="my-6 w-full flex justify-center font-xs  lg:justify-end items-center"
         >
-          <ul className="inline-flex -space-x-px">
+          <ul className="inline-flex -space-x-px full">
             <li>
               <span
                 onClick={() => {
@@ -100,16 +132,20 @@ const ManageInventories = () => {
                     setPageNumber(pageNumber - 1);
                   }
                 }}
-                className="px-1.5 lg:py-2 lg:px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="px-2 py-0.5 lg:py-2 lg:px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  className="mr-2 hidden lg:inline"
+                />{" "}
                 Previous
               </span>
             </li>
             {[...Array(pages).keys()].map((page) => (
               <li key={page}>
                 <span
-                  className={`px-1.5 lg:py-2 lg:px-3.5 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
-                    pageNumber === page ? "bg-blue-400 text-white" : ""
+                  className={`px-2 py-0.5 lg:py-2 lg:px-3.5 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                    pageNumber === page ? "text-gray-700 bg-gray-200" : ""
                   }`}
                   onClick={() => setPageNumber(page)}
                 >
@@ -124,9 +160,13 @@ const ManageInventories = () => {
                     setPageNumber(pageNumber + 1);
                   }
                 }}
-                className="px-1.5 lg:py-2 lg:px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="px-2 py-0.5 lg:py-2 lg:px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
-                Next
+                Next{" "}
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className="ml-2 hidden lg:inline"
+                />
               </span>
             </li>
           </ul>
@@ -136,7 +176,7 @@ const ManageInventories = () => {
               setLimit(e.target.value);
               setPageNumber(0);
             }}
-            className="px-1.5 lg:py-2 lg:px-3 rounded-lg leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="hidden lg:block px-1.5 lg:py-2 lg:px-3 rounded-lg leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <option value="5">5</option>
             <option value="10">10</option>

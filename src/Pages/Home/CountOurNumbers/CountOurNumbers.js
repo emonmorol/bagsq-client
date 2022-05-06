@@ -17,7 +17,7 @@ const CountOurNumbers = () => {
         <div className="count-inside-banner">
           <div className="grid grid-cols-2 gap-7 lg:grid-cols-4">
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full bg-white text-black hover:bg-transparent hover:text-white cursor-text mx-auto">
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <div className="text-center">
@@ -34,7 +34,7 @@ const CountOurNumbers = () => {
               </div>
             </div>
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full bg-white text-black hover:bg-transparent hover:text-white cursor-text mx-auto">
                 <FontAwesomeIcon icon={faBriefcase} />
               </div>
               <div className="text-center">
@@ -49,7 +49,7 @@ const CountOurNumbers = () => {
               </div>
             </div>
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 mb-2 px-[1.45rem] rounded-full bg-white text-black hover:bg-transparent hover:text-white cursor-text mx-auto">
                 <FontAwesomeIcon icon={faPenNib} />
               </div>
               <div className="text-center">
@@ -64,7 +64,7 @@ const CountOurNumbers = () => {
               </div>
             </div>
             <div className="lg:mx-24 text-white flex flex-col justify-center">
-              <div className="text-6xl border py-5 px-[1.45rem] rounded-full mx-auto">
+              <div className="text-6xl border py-5 px-[1.45rem] rounded-full bg-white text-black hover:bg-transparent hover:text-white cursor-text mx-auto">
                 <FontAwesomeIcon icon={faPeopleGroup} />
               </div>
               <div className="text-center">
