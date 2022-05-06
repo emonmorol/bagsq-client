@@ -13,7 +13,12 @@ const Products = () => {
 
   return (
     <div className="py-14 flex flex-col justify-center min-h-screen">
-      <h1 className="text-center">Our Products</h1>
+      <div className="text-center mt-10">
+        <span className="text-center text-2xl font-bold">Products </span>
+        <span className="text-center text-2xl font-bold text-blue-400">
+          Clients Have
+        </span>
+      </div>
 
       {/* <------------------------->mapping all products<-------------------------> */}
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 px-5 lg:px-28 pt-5">
