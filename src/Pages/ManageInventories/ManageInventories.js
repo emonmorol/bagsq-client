@@ -90,7 +90,7 @@ const ManageInventories = () => {
         </Zoom>
         <div
           aria-label="Page navigation example"
-          className="my-6 flex justify-end items-center"
+          className="my-6 flex justify-center font-xs  lg:justify-end items-center"
         >
           <ul className="inline-flex -space-x-px">
             <li>
@@ -100,7 +100,7 @@ const ManageInventories = () => {
                     setPageNumber(pageNumber - 1);
                   }
                 }}
-                className="py-2 px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="px-1.5 lg:py-2 lg:px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Previous
               </span>
@@ -108,7 +108,7 @@ const ManageInventories = () => {
             {[...Array(pages).keys()].map((page) => (
               <li key={page}>
                 <span
-                  className={`py-2 px-3.5 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                  className={`px-1.5 lg:py-2 lg:px-3.5 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
                     pageNumber === page ? "bg-blue-400 text-white" : ""
                   }`}
                   onClick={() => setPageNumber(page)}
@@ -124,7 +124,7 @@ const ManageInventories = () => {
                     setPageNumber(pageNumber + 1);
                   }
                 }}
-                className="py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="px-1.5 lg:py-2 lg:px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Next
               </span>
@@ -136,7 +136,7 @@ const ManageInventories = () => {
               setLimit(e.target.value);
               setPageNumber(0);
             }}
-            className="py-2 px-3 rounded-lg leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="px-1.5 lg:py-2 lg:px-3 rounded-lg leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <option value="5">5</option>
             <option value="10">10</option>
