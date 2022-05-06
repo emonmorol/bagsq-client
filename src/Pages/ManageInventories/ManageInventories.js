@@ -1,15 +1,31 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import useProducts from "../../Hooks/useProducts";
+// import useProducts from "../../Hooks/useProducts";
 import TableRow from "./TableRow";
 import { Zoom } from "react-reveal";
 import Loading from "../Shared/Loading/Loading";
 
 const ManageInventories = () => {
-  const [products, isLoading, setProducts] = useProducts([]);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [limit, setLimit] = useState(5);
+  const [pages, setPages] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
+  console.log(pageNumber, pages);
+
+  useEffect(() => {
+    const url = `https://bagsqhike.herokuapp.com/products?limit=${limit}&pageNumber=${pageNumber}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.products);
+        setIsLoading(false);
+        setPages(Math.ceil(data.count / limit));
+      });
+  }, [limit, pageNumber]);
 
   const handleDelete = (id, confirmation) => {
     const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
@@ -72,6 +88,62 @@ const ManageInventories = () => {
             </table>
           </div>
         </Zoom>
+        <div
+          aria-label="Page navigation example"
+          className="my-6 flex justify-end items-center"
+        >
+          <ul className="inline-flex -space-x-px">
+            <li>
+              <span
+                onClick={() => {
+                  if (pageNumber > 0) {
+                    setPageNumber(pageNumber - 1);
+                  }
+                }}
+                className="py-2 px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Previous
+              </span>
+            </li>
+            {[...Array(pages).keys()].map((page) => (
+              <li key={page}>
+                <span
+                  className={`py-2 px-3.5 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                    pageNumber === page ? "bg-blue-400 text-white" : ""
+                  }`}
+                  onClick={() => setPageNumber(page)}
+                >
+                  {page + 1}
+                </span>
+              </li>
+            ))}
+            <li>
+              <span
+                onClick={() => {
+                  if (pageNumber + 1 < pages) {
+                    setPageNumber(pageNumber + 1);
+                  }
+                }}
+                className="py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Next
+              </span>
+            </li>
+          </ul>
+          <select
+            defaultValue={limit}
+            onChange={(e) => {
+              setLimit(e.target.value);
+              setPageNumber(0);
+            }}
+            className="py-2 px-3 rounded-lg leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
       <div className="my-5 mx-auto mb-12">
         <Link

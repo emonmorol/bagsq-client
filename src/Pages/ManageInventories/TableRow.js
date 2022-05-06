@@ -33,8 +33,8 @@ const TableRow = ({ product, handleDelete }) => {
         key={_id}
         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
       >
-        <td className="w-1/12 px-6 py-3 border-x  dark:text-white whitespace-nowrap">
-          <img className="w-1/2 mx-auto" src={image} alt="" />
+        <td className="w-1/6 px-6 py-3 border-x  dark:text-white whitespace-nowrap">
+          <img className="w-1/3 mx-auto" src={image} alt="" />
         </td>
         <td className="px-6 py-3 border-x text-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
           {name}
