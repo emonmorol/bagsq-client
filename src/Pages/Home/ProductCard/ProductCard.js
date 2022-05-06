@@ -47,8 +47,11 @@ const ProductCard = ({ product }) => {
                   </span>
                 </span>
                 <span>
-                  Available: {quantity === 0 ? "Sold Out" : quantity}
-                  {quantity === 0 ? "" : "Pcs."}
+                  Available:{" "}
+                  <span className="font-semibold">
+                    {quantity === 0 ? "Sold Out" : quantity}
+                  </span>
+                  {quantity === 0 ? "" : " Pcs."}
                 </span>
               </div>
             </div>

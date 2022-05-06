@@ -70,7 +70,7 @@ const ProductInventory = () => {
 
   return (
     <Zoom left>
-      <div className="lg:flex justify-center items-center mt-20 mb-40 px-4">
+      <div className="lg:flex justify-center items-center mt-10 mb-40 px-4">
         <div className="bg-white lg:flex justify-center items-center py-6 shadow-lg rounded-2xl">
           <div className="w-4/5 mx-auto">
             <img src={product?.image} alt="" />
@@ -94,7 +94,7 @@ const ProductInventory = () => {
                 <span className="font-bold">
                   {newQuantity === 0 ? "Sold Out" : newQuantity}
                 </span>{" "}
-                {newQuantity === 0 ? "" : "Pcs."}
+                {newQuantity === 0 ? "" : " Pcs."}
               </span>
               <p className="my-2">Supplier : {product?.supplier}</p>
               <p className="my-2">Product Id : {product?._id}</p>

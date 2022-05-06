@@ -64,7 +64,13 @@ const MyItemCard = ({ item, handleDelete }) => {
                     <FontAwesomeIcon icon={faStarHalfStroke} />
                   </span>
                 </span>
-                <span>Available: {quantity} Pcs.</span>
+                <span className="text-sm">
+                  Available:{" "}
+                  <span className="font-bold">
+                    {quantity === 0 ? "Sold Out" : quantity}
+                  </span>{" "}
+                  {quantity === 0 ? "" : " Pcs."}
+                </span>
               </div>
             </div>
             <div className="flex">
