@@ -13,7 +13,7 @@ const Reviews = () => {
       setReviews(response.data);
       setIsLoading(false);
     });
-  }, []);
+  }, [reviews]);
   if (isLoading) {
     return <Loading />;
   }

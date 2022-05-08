@@ -12,7 +12,7 @@ const useProducts = () => {
         setProducts(data.products);
         setIsLoading(false);
       });
-  }, []);
+  }, [products]);
   return [products, isLoading, setProducts];
 };
 
