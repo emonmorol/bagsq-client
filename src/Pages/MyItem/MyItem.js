@@ -41,7 +41,7 @@ const MyItem = () => {
         navigate("/login");
       }
     }
-  }, [user, loadItems, myInventory]);
+  }, [user, loadItems]);
 
   const handleDelete = (id, confirmation) => {
     const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;

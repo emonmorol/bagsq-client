@@ -31,7 +31,7 @@ const ManageInventories = () => {
         setIsLoading(false);
         setIsPageLoading(false);
       });
-  }, [limit, pageNumber, products]);
+  }, [limit, pageNumber]);
 
   const handleDelete = (id, confirmation) => {
     const url = `https://bagsqhike.herokuapp.com/inventory/${id}`;
